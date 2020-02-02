@@ -1,0 +1,19 @@
+{
+  "name": "FastFeet",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lsm-5/FastFeet.git",
+  "author": "Lucas Mendonça <lsm5@cin.ufpe.br>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "dev:debug": "nodemon --inspect src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1",
+    "sucrase": "^3.10.1"
+  }
+}
