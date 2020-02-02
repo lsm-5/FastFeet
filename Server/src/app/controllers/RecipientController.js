@@ -1,0 +1,65 @@
+import * as Yup from 'yup';
+import Recipient from '../models/Recipient';
+import User from '../models/User';
+
+class RecipientController {
+  async store(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      street: Yup.string().required(),
+      number: Yup.number().required(),
+      complement: Yup.string(),
+      state: Yup.string().required(),
+      city: Yup.string().required(),
+      zipcode: Yup.number().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation Fails' });
+    }
+
+    const recipientExists = await Recipient.findOne({
+      where: { name: req.body.name },
+    });
+
+    if (recipientExists) {
+      return res.status(400).json({ error: 'Recipient already exists' });
+    }
+
+    const isAdmin = await User.findOne({
+      where: {
+        id: req.userId,
+        admin: true,
+      },
+    });
+
+    if (!isAdmin) {
+      return res
+        .status(401)
+        .json({ error: 'You can only create recipient with admin' });
+    }
+
+    const {
+      id,
+      name,
+      street,
+      number,
+      complement,
+      state,
+      city,
+      zipcode,
+    } = await Recipient.create(req.body);
+    return res.json({
+      id,
+      name,
+      street,
+      number,
+      complement,
+      state,
+      city,
+      zipcode,
+    });
+  }
+}
+
+export default new RecipientController();
