@@ -49,7 +49,7 @@ class RecipientController {
       city,
       zipcode,
     } = await Recipient.create(req.body);
-    return res.json({
+    return res.status(201).json({
       id,
       name,
       street,
@@ -103,7 +103,7 @@ class RecipientController {
 
     const updatedRecipient = await recipient.update(req.body);
 
-    return res.json(updatedRecipient);
+    return res.status(200).json(updatedRecipient);
   }
 }
 export default new RecipientController();
