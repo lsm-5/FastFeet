@@ -60,6 +60,50 @@ class RecipientController {
       zipcode,
     });
   }
-}
 
+  async update(req, res) {
+    const schema = Yup.object(req.body).shape({
+      name: Yup.string().required(),
+      street: Yup.string().required(),
+      number: Yup.number().required(),
+      complement: Yup.string(),
+      state: Yup.string().required(),
+      city: Yup.string().required(),
+      zipcode: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fail' });
+    }
+
+    const isAdmin = await User.findOne({
+      where: {
+        id: req.userId,
+        admin: true,
+      },
+    });
+
+    if (!isAdmin) {
+      return res
+        .status(401)
+        .json({ error: 'You can only create recipient with admin' });
+    }
+
+    const { name } = req.body;
+
+    const recipient = await Recipient.findByPk(req.params.id);
+
+    if (name !== recipient.name) {
+      const recipientExists = await Recipient.findOne({ where: { name } });
+
+      if (recipientExists) {
+        return res.status(400).json({ error: 'Recipients already exists' });
+      }
+    }
+
+    const updatedRecipient = await recipient.update(req.body);
+
+    return res.json(updatedRecipient);
+  }
+}
 export default new RecipientController();
