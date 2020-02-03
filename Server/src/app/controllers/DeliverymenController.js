@@ -122,6 +122,22 @@ class DeliverymenController {
 
     return res.status(200).json(updateddeliverymen);
   }
+
+  async delete(req, res) {
+    const { deliverymenId } = req.params;
+
+    const deliverymen = await Deliverymen.findByPk(deliverymenId);
+
+    if (!deliverymen) {
+      return res.status(400).json({
+        message: 'Deliverymen not found',
+      });
+    }
+
+    await deliverymen.destroy();
+
+    return res.status(204).json();
+  }
 }
 
 export default new DeliverymenController();
