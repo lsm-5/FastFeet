@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { parseISO, isWithinInterval, setHours, startOfDay } from 'date-fns';
+import { parseISO, isWithinInterval, setHours } from 'date-fns';
 
 import Recipient from '../models/Recipient';
 import Order from '../models/Order';
@@ -156,6 +156,22 @@ class OrdersController {
     const updatedOrder = await order.update(req.body);
 
     return res.status(200).json(updatedOrder);
+  }
+
+  async delete(req, res) {
+    const { orderId } = req.params;
+
+    const order = await Order.findByPk(orderId);
+
+    if (!order) {
+      return res.status(400).json({
+        message: 'Order not found ',
+      });
+    }
+
+    await order.destroy();
+
+    return res.status(204).json();
   }
 }
 
