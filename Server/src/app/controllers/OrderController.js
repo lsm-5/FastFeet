@@ -5,6 +5,7 @@ import Recipient from '../models/Recipient';
 import Order from '../models/Order';
 import Deliverymen from '../models/Deliverymen';
 import File from '../models/File';
+import Notification from '../schemas/Notification';
 
 class OrdersController {
   async index(req, res) {
@@ -79,6 +80,11 @@ class OrdersController {
     }
 
     const order = await Order.create(req.body);
+
+    await Notification.create({
+      content: `Você tem uma nova entrega de produto ${req.body.product}, para o destino ${recipient.street}, cidade ${recipient.city}, estado ${recipient.state}`,
+      user: req.body.deliverymen_id,
+    });
 
     return res.status(201).json(order);
   }

@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import mongoose from 'mongoose';
 
 import User from '../app/models/User';
 import Recipient from '../app/models/Recipient';
@@ -13,6 +14,7 @@ const models = [User, Recipient, File, Deliverymen, Order];
 class Database {
   constructor() {
     this.init();
+    this.mongo();
   }
 
   init() {
@@ -20,6 +22,17 @@ class Database {
     models
       .map(model => model.init(this.connection))
       .map(model => model.associate && model.associate(this.connection.models));
+  }
+
+  mongo() {
+    this.mongoConnection = mongoose.connect(
+      'mongodb://localhost:27017/fastfeet',
+      {
+        useNewUrlParser: true, // estou utilizando um formato novo na string de conexão
+        useFindAndModify: true, // para poder buscar e atualizar os registros
+        useUnifiedTopology: true, // DeprecationWarning apareceu no console então eu estou usando, conforme a recomendação do mongo
+      }
+    );
   }
 }
 export default new Database();
