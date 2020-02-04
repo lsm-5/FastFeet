@@ -6,6 +6,37 @@ import Deliverymen from '../models/Deliverymen';
 import File from '../models/File';
 
 class OrdersController {
+  async index(req, res) {
+    const { page = 1 } = req.query;
+    const orders = await Order.findAll({
+      limit: 20,
+      offset: (page - 1) * 20,
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+        },
+        {
+          model: File,
+          as: 'signature',
+        },
+        {
+          model: Deliverymen,
+          as: 'deliverymen',
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['name', 'path', 'url'],
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.status(200).json(orders);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       product: Yup.string().required(),
