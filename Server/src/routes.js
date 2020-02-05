@@ -18,6 +18,9 @@ const upload = multer(multerConfig);
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
+routes.get('/notifications/:id', NotificationController.index);
+routes.put('/notifications/:id', NotificationController.update);
+
 // Todas as rotas que forem chamadas a partir daqui tem que ser autenticada
 routes.use(authMiddleware);
 routes.put('/users', UserController.update);
@@ -36,8 +39,5 @@ routes.post('/orders', OrderController.store);
 routes.get('/orders', OrderController.index);
 routes.put('/orders/:orderId', OrderController.update);
 routes.delete('/orders/:orderId', OrderController.delete);
-
-routes.get('/notifications', NotificationController.index);
-routes.put('/notifications/:id', NotificationController.update);
 
 export default routes;
