@@ -9,6 +9,7 @@ import FileController from './app/controllers/FileController';
 import DeliverymenController from './app/controllers/DeliverymenController';
 import OrderController from './app/controllers/OrderController';
 import NotificationController from './app/controllers/NotificationController';
+import DeliveriesController from './app/controllers/DeliveriesController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -20,6 +21,8 @@ routes.post('/sessions', SessionController.store);
 
 routes.get('/notifications/:id', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);
+
+routes.get('/deliverymen/:id/deliveries', DeliveriesController.index);
 
 // Todas as rotas que forem chamadas a partir daqui tem que ser autenticada
 routes.use(authMiddleware);

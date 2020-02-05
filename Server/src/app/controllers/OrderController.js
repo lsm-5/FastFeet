@@ -79,6 +79,24 @@ class OrdersController {
       }
     }
 
+    // Allow delivery between 8h - 18h
+    if (req.body.start_date) {
+      const parsedStartDate = parseISO(req.body.start_date);
+
+      // Checks if the start time is between 8 and 18
+      const rangeStart = setHours(parsedStartDate, 8);
+
+      const rangeEnd = setHours(parsedStartDate, 18);
+
+      if (
+        !isWithinInterval(parsedStartDate, { start: rangeStart, end: rangeEnd })
+      ) {
+        return res.status(400).json({
+          message: 'You can only withdraw between 08:00 and 18:00.',
+        });
+      }
+    }
+
     const order = await Order.create(req.body);
 
     await Notification.create({
