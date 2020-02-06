@@ -23,6 +23,10 @@ routes.get('/notifications/:id', NotificationController.index);
 routes.put('/notifications/:id', NotificationController.update);
 
 routes.get('/deliverymen/:id/deliveries', DeliveriesController.index);
+routes.patch(
+  '/deliverymen/:deliverymenId/deliveries/:orderId',
+  DeliveriesController.update
+);
 
 // Todas as rotas que forem chamadas a partir daqui tem que ser autenticada
 routes.use(authMiddleware);
