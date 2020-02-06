@@ -8,13 +8,13 @@ import Order from '../models/Order';
 class DeliveryProblemsController {
   async index(req, res) {
     const { page = 1 } = req.query;
-    const { orderId } = req.params;
+    const { deliveryProblemId } = req.params;
 
     const ordersProblem = await DeliveryProblem.findAll({
       limit: 20,
       offset: (page - 1) * 20,
       where: {
-        order_id: orderId,
+        order_id: deliveryProblemId,
       },
     });
 
@@ -56,6 +56,26 @@ class DeliveryProblemsController {
       ...req.body,
     });
     return res.status(201).json(problem);
+  }
+
+  async delete(req, res) {
+    const { deliveryProblemId } = req.params;
+
+    const orderProblem = await DeliveryProblem.findByPk(deliveryProblemId);
+
+    if (!orderProblem) {
+      return res.status(400).json({
+        message: 'Order Problem not found',
+      });
+    }
+
+    const order = await Order.findByPk(orderProblem.order_id);
+
+    await order.update({
+      canceled_at: new Date(),
+    });
+
+    return res.status(204).json();
   }
 }
 
