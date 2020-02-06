@@ -108,8 +108,8 @@ class DeliverymenController {
 
       const deliveriesCount = await Order.count({
         where: {
-          deliverymenId,
-          startDate: {
+          deliverymen_id: deliverymenId,
+          start_date: {
             [Op.between]: [
               startOfDay(parsedStartDate),
               endOfDay(parsedStartDate),
