@@ -30,6 +30,11 @@ routes.patch(
 );
 
 routes.post('/delivery/:orderId/problems', DeliveryProblemController.store);
+routes.get(
+  '/delivery/:orderId/problems',
+  authMiddleware,
+  DeliveryProblemController.index
+);
 
 // Todas as rotas que forem chamadas a partir daqui tem que ser autenticada
 routes.use(authMiddleware);
