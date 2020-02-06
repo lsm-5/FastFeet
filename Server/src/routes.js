@@ -10,6 +10,7 @@ import DeliverymenController from './app/controllers/DeliverymenController';
 import OrderController from './app/controllers/OrderController';
 import NotificationController from './app/controllers/NotificationController';
 import DeliveriesController from './app/controllers/DeliveriesController';
+import DeliveryProblemController from './app/controllers/DeliveryProblemController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -27,6 +28,8 @@ routes.patch(
   '/deliverymen/:deliverymenId/deliveries/:orderId',
   DeliveriesController.update
 );
+
+routes.post('/delivery/:orderId/problems', DeliveryProblemController.store);
 
 // Todas as rotas que forem chamadas a partir daqui tem que ser autenticada
 routes.use(authMiddleware);

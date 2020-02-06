@@ -81,7 +81,7 @@ class DeliverymenController {
 
     if (!deliverymen) {
       return res.status(400).json({
-        message: 'deliverymen not found',
+        message: 'Deliverymen not found',
       });
     }
 
