@@ -4,6 +4,7 @@ import DeliveryProblem from '../models/Deliveryproblem';
 import Order from '../models/Order';
 import Deliverymen from '../models/Deliverymen';
 import Mail from '../../lib/Mail';
+import Notification from '../schemas/Notification';
 
 class DeliveryProblemsController {
   async index(req, res) {
@@ -82,6 +83,11 @@ class DeliveryProblemsController {
       to: `${deliverymen.name} <${deliverymen.email}>`,
       subject: 'Nova cancelamento',
       text: `Você tem um novo cancelamento, produto: ${order.product}`,
+    });
+
+    await Notification.create({
+      content: `Você tem um novo cancelamento, produto: ${order.product}`,
+      user: order.deliverymen_id,
     });
 
     return res.status(204).json();
