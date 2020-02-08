@@ -6,6 +6,7 @@ import Order from '../models/Order';
 import Deliverymen from '../models/Deliverymen';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
+import Mail from '../../lib/Mail';
 
 class OrdersController {
   async index(req, res) {
@@ -102,6 +103,16 @@ class OrdersController {
     await Notification.create({
       content: `Você tem uma nova entrega de produto ${req.body.product}, para o destino ${recipient.street}, cidade ${recipient.city}, estado ${recipient.state}`,
       user: req.body.deliverymen_id,
+    });
+
+    /*
+     * send email to deliverymen
+     */
+
+    await Mail.sendMail({
+      to: `${deliverymen.name} <${deliverymen.email}>`,
+      subject: 'Nova entrega',
+      text: `Você tem uma nova entrega de produto ${req.body.product}, para o destino ${recipient.street}, cidade ${recipient.city}, estado ${recipient.state}`,
     });
 
     return res.status(201).json(order);

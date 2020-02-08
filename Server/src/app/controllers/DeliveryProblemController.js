@@ -1,9 +1,9 @@
-// for deliveryman
-
 import * as Yup from 'yup';
 
 import DeliveryProblem from '../models/Deliveryproblem';
 import Order from '../models/Order';
+import Deliverymen from '../models/Deliverymen';
+import Mail from '../../lib/Mail';
 
 class DeliveryProblemsController {
   async index(req, res) {
@@ -52,9 +52,10 @@ class DeliveryProblemsController {
     }
 
     const problem = await DeliveryProblem.create({
-      orderId,
+      order_id: orderId,
       ...req.body,
     });
+
     return res.status(201).json(problem);
   }
 
@@ -73,6 +74,14 @@ class DeliveryProblemsController {
 
     await order.update({
       canceled_at: new Date(),
+    });
+
+    const deliverymen = await Deliverymen.findByPk(order.deliverymen_id);
+
+    await Mail.sendMail({
+      to: `${deliverymen.name} <${deliverymen.email}>`,
+      subject: 'Nova cancelamento',
+      text: `Você tem um novo cancelamento, produto: ${order.product}`,
     });
 
     return res.status(204).json();
