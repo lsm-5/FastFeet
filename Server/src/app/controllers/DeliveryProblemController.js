@@ -5,6 +5,7 @@ import Order from '../models/Order';
 import Deliverymen from '../models/Deliverymen';
 import Mail from '../../lib/Mail';
 import Notification from '../schemas/Notification';
+import Recipient from '../models/Recipient';
 
 class DeliveryProblemsController {
   async index(req, res) {
@@ -78,16 +79,18 @@ class DeliveryProblemsController {
     });
 
     const deliverymen = await Deliverymen.findByPk(order.deliverymen_id);
+    const recipient = await Recipient.findByPk(order.recipient_id);
 
     await Mail.sendMail({
       to: `${deliverymen.name} <${deliverymen.email}>`,
-      subject: 'Nova cancelamento',
-      text: `Você tem um novo cancelamento, produto: ${order.product}`,
-    });
-
-    await Notification.create({
-      content: `Você tem um novo cancelamento, produto: ${order.product}`,
-      user: order.deliverymen_id,
+      subject: 'Novo cancelamento',
+      template: 'cancellationOrder',
+      context: {
+        user: deliverymen.name,
+        product: order.product,
+        recipient: recipient.name,
+        address: `${recipient.street}, ${recipient.number} - ${recipient.city}/${recipient.state} (${recipient.zipcode})`,
+      },
     });
 
     return res.status(204).json();
