@@ -93,6 +93,11 @@ class DeliveryProblemsController {
       },
     });
 
+    await Notification.create({
+      content: `Você tem um cancelamento na entrega do produto ${order.product}, para o destino ${recipient.street}, cidade ${recipient.city}, estado ${recipient.state}`,
+      user: order.deliverymen_id,
+    });
+
     return res.status(204).json();
   }
 }
