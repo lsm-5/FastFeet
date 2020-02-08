@@ -112,7 +112,13 @@ class OrdersController {
     await Mail.sendMail({
       to: `${deliverymen.name} <${deliverymen.email}>`,
       subject: 'Nova entrega',
-      text: `Você tem uma nova entrega de produto ${req.body.product}, para o destino ${recipient.street}, cidade ${recipient.city}, estado ${recipient.state}`,
+      template: 'createOrder',
+      context: {
+        user: deliverymen.name,
+        product: order.product,
+        recipient: recipient.name,
+        address: `${recipient.street}, ${recipient.number} - ${recipient.city}/${recipient.state} (${recipient.zipcode})`,
+      },
     });
 
     return res.status(201).json(order);
