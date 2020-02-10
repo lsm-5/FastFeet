@@ -3,9 +3,12 @@ import * as Yup from 'yup';
 import DeliveryProblem from '../models/Deliveryproblem';
 import Order from '../models/Order';
 import Deliverymen from '../models/Deliverymen';
-import Mail from '../../lib/Mail';
 import Notification from '../schemas/Notification';
 import Recipient from '../models/Recipient';
+
+import Queue from '../../lib/Queue';
+
+import cancellationOrderEmail from '../jobs/cancellationOrderEmail';
 
 class DeliveryProblemsController {
   async index(req, res) {
@@ -81,16 +84,14 @@ class DeliveryProblemsController {
     const deliverymen = await Deliverymen.findByPk(order.deliverymen_id);
     const recipient = await Recipient.findByPk(order.recipient_id);
 
-    await Mail.sendMail({
-      to: `${deliverymen.name} <${deliverymen.email}>`,
-      subject: 'Novo cancelamento',
-      template: 'cancellationOrder',
-      context: {
-        user: deliverymen.name,
-        product: order.product,
-        recipient: recipient.name,
-        address: `${recipient.street}, ${recipient.number} - ${recipient.city}/${recipient.state} (${recipient.zipcode})`,
-      },
+    /*
+     * Send email
+     */
+
+    await Queue.add(cancellationOrderEmail.key, {
+      deliverymen,
+      order,
+      recipient,
     });
 
     await Notification.create({
