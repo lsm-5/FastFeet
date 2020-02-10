@@ -6,7 +6,9 @@ import Order from '../models/Order';
 import Deliverymen from '../models/Deliverymen';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
-import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
+
+import createOrderEmail from '../jobs/createOrderEmail';
 
 class OrdersController {
   async index(req, res) {
@@ -109,17 +111,7 @@ class OrdersController {
      * send email to deliverymen
      */
 
-    await Mail.sendMail({
-      to: `${deliverymen.name} <${deliverymen.email}>`,
-      subject: 'Nova entrega',
-      template: 'createOrder',
-      context: {
-        user: deliverymen.name,
-        product: order.product,
-        recipient: recipient.name,
-        address: `${recipient.street}, ${recipient.number} - ${recipient.city}/${recipient.state} (${recipient.zipcode})`,
-      },
-    });
+    await Queue.add(createOrderEmail.key, { deliverymen, order, recipient });
 
     return res.status(201).json(order);
   }
