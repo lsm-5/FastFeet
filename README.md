@@ -5,7 +5,7 @@
 </h1>
 
 <h4 align="center">
- Software completo paragendamento de serviço de beleza
+ Software completo para empresa de transporte 🚚
 </h4>
 
 <p align="center">
@@ -49,7 +49,7 @@
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/lsm-5/GoBarber.git
+$ git clone https://github.com/lsm-5/FastFeet.git
 
 # Vá para a seguinte pasta
 
@@ -74,7 +74,7 @@ $ yarn start
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/lsm-5/GoBarber.git
+$ git clone https://github.com/lsm-5/FastFeet.git
 
 # Vá para a seguinte pasta
 $ cd FrontMobile
@@ -96,7 +96,7 @@ $ react-native run-ios
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/lsm-5/GoBarber.git
+$ git clone https://github.com/lsm-5/FastFeet.git
 
 # Vá para a seguinte pasta
 $ cd Server
@@ -104,9 +104,15 @@ $ cd Server
 # Instale as depedências
 $ yarn install
 
+# Inicializar as migrations e as seeds
+yarn sequelize db:migrate
+yarn sequelize db:seed:all
+
 # Inicialize o software (android ou ios)
 $ yarn dev
 ```
+configure as variáveis ambiente, seguindo o modelo do arquivo ```.env.example```.
+
 
 ### Screenshots servidor
 
@@ -127,12 +133,33 @@ $ yarn dev
 Este projeto foi desenvolvido baseado nas atividades da [RocketSeat GoStack Bootcamp](https://rocketseat.com.br/bootcamp) com as seguintes tecnologias:
 
 - [Axios](https://github.com/axios/axios)
-- Express
-- [date-fns](https://date-fns.org/)
+- [Docker](https://www.docker.com/)
+- [Node.js](https://github.com/nodejs)
+- [Express](https://github.com/expressjs/express)
+- [Sequelize](https://github.com/sequelize/sequelize) 
+- [JWT](https://www.npmjs.com/package/jsonwebtoken)
+- [Bcryptjs](https://www.npmjs.com/package/bcrypt)
+- [DotEnv](https://github.com/motdotla/dotenv) 
+- [Nodemailer](https://github.com/nodemailer/nodemailer) 
+- [Handlebars](https://handlebarsjs.com/) 
+- [Bee-Queue](https://github.com/bee-queue/bee-queue) 
+- [Date-fns](https://github.com/date-fns/date-fns)
 - [VS Code][vc] com [EditorConfig][vceditconfig] e [ESLint][vceslint]
 - [Yup](https://www.npmjs.com/package/yup)
+- [Sentry](https://sentry.io/)
+- [Youch](https://github.com/poppinss/youch)
 
-Feito com ♥ por Lucas Mendonça // [Contato](https://www.linkedin.com/in/lucas-mendon%C3%A7a-12181a187/)
+### Bancos de dados da aplicacão
+- [Postegres](https://github.com/postgres/postgres)
+- [MongoDB](https://www.mongodb.com/)
+- [Redis](https://redis.io/)
+
+### Ferramentas utilizadas no ambiente de desenvolvimento:
+- [Sucrase](https://sucrase.io/)
+- [ESLint](https://github.com/eslint/eslint)
+- [Prettier](https://github.com/prettier/prettier)
+
+Feito com ♥ por Lucas Mendonça // [LinkedIn](https://www.linkedin.com/in/lucas-mendon%C3%A7a-12181a187/)
 
 [nodejs]: https://nodejs.org/
 [yarn]: https://yarnpkg.com/
