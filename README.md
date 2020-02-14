@@ -39,6 +39,7 @@
 - [Servidor](#como-usar-o-servidor)
 
   - [Como usar](#como-usar-o-servidor)
+  - [Importe as rotas para seu Insomnia](#baixe-todas-as-rotas-insomnia)
   - [Screenshots](#screenshots-servidor)
 
 - [Tecnologias](#tecnologias)
@@ -67,7 +68,6 @@ $ yarn start
 
 ### Screenshots web
 
-
 ## Software mobile
 
 ### Como usar para mobile
@@ -88,7 +88,6 @@ $ react-native run-ios
 ```
 
 ### Screenshots mobile
-
 
 ## Servidor
 
@@ -111,8 +110,12 @@ yarn sequelize db:seed:all
 # Inicialize o software (android ou ios)
 $ yarn dev
 ```
-configure as variáveis ambiente, seguindo o modelo do arquivo ```.env.example```.
 
+configure as variáveis ambiente, seguindo o modelo do arquivo `.env.example`.
+
+### Baixe todas as rotas (Insomnia)
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=FasfFeet%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Flsm-5%2FFastFeet%2Fmaster%2FServer%2FInsomniaExport.json)
 
 ### Screenshots servidor
 
@@ -136,13 +139,13 @@ Este projeto foi desenvolvido baseado nas atividades da [RocketSeat GoStack Boot
 - [Docker](https://www.docker.com/)
 - [Node.js](https://github.com/nodejs)
 - [Express](https://github.com/expressjs/express)
-- [Sequelize](https://github.com/sequelize/sequelize) 
+- [Sequelize](https://github.com/sequelize/sequelize)
 - [JWT](https://www.npmjs.com/package/jsonwebtoken)
 - [Bcryptjs](https://www.npmjs.com/package/bcrypt)
-- [DotEnv](https://github.com/motdotla/dotenv) 
-- [Nodemailer](https://github.com/nodemailer/nodemailer) 
-- [Handlebars](https://handlebarsjs.com/) 
-- [Bee-Queue](https://github.com/bee-queue/bee-queue) 
+- [DotEnv](https://github.com/motdotla/dotenv)
+- [Nodemailer](https://github.com/nodemailer/nodemailer)
+- [Handlebars](https://handlebarsjs.com/)
+- [Bee-Queue](https://github.com/bee-queue/bee-queue)
 - [Date-fns](https://github.com/date-fns/date-fns)
 - [VS Code][vc] com [EditorConfig][vceditconfig] e [ESLint][vceslint]
 - [Yup](https://www.npmjs.com/package/yup)
@@ -150,11 +153,13 @@ Este projeto foi desenvolvido baseado nas atividades da [RocketSeat GoStack Boot
 - [Youch](https://github.com/poppinss/youch)
 
 ### Bancos de dados da aplicacão
+
 - [Postegres](https://github.com/postgres/postgres)
 - [MongoDB](https://www.mongodb.com/)
 - [Redis](https://redis.io/)
 
 ### Ferramentas utilizadas no ambiente de desenvolvimento:
+
 - [Sucrase](https://sucrase.io/)
 - [ESLint](https://github.com/eslint/eslint)
 - [Prettier](https://github.com/prettier/prettier)
