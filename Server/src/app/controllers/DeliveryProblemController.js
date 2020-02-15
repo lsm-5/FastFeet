@@ -1,14 +1,12 @@
 import * as Yup from 'yup';
 
+import Queue from '../../lib/Queue';
+import cancellationOrderEmail from '../jobs/cancellationOrderEmail';
+import Deliverymen from '../models/Deliverymen';
 import DeliveryProblem from '../models/Deliveryproblem';
 import Order from '../models/Order';
-import Deliverymen from '../models/Deliverymen';
-import Notification from '../schemas/Notification';
 import Recipient from '../models/Recipient';
-
-import Queue from '../../lib/Queue';
-
-import cancellationOrderEmail from '../jobs/cancellationOrderEmail';
+import Notification from '../schemas/Notification';
 
 class DeliveryProblemsController {
   async index(req, res) {

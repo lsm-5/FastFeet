@@ -1,14 +1,13 @@
-import * as Yup from 'yup';
 import { parseISO, isWithinInterval, setHours } from 'date-fns';
+import * as Yup from 'yup';
 
-import Recipient from '../models/Recipient';
-import Order from '../models/Order';
+import Queue from '../../lib/Queue';
+import createOrderEmail from '../jobs/createOrderEmail';
 import Deliverymen from '../models/Deliverymen';
 import File from '../models/File';
+import Order from '../models/Order';
+import Recipient from '../models/Recipient';
 import Notification from '../schemas/Notification';
-import Queue from '../../lib/Queue';
-
-import createOrderEmail from '../jobs/createOrderEmail';
 
 class OrdersController {
   async index(req, res) {

@@ -1,8 +1,8 @@
 import 'dotenv/config'; // before all imports
 
+import * as Sentry from '@sentry/node';
 import express from 'express';
 import path from 'path';
-import * as Sentry from '@sentry/node';
 import 'express-async-errors'; // before import routes
 import Youch from 'youch';
 

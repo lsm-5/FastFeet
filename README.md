@@ -115,7 +115,8 @@ configure as variáveis ambiente, seguindo o modelo do arquivo `.env.example`.
 
 ### Baixe todas as rotas (Insomnia)
 
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=FasfFeet%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Flsm-5%2FFastFeet%2Fmaster%2FServer%2FInsomniaExport.json)
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=FastFeet%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Flsm-5%2FFastFeet%2Fmaster%2FServer%2FInsomniaExport.json)
+
 
 ### Screenshots servidor
 

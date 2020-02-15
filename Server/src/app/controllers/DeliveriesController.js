@@ -1,5 +1,3 @@
-import * as Yup from 'yup';
-import { Op } from 'sequelize';
 import {
   parseISO,
   isWithinInterval,
@@ -7,10 +5,12 @@ import {
   startOfDay,
   endOfDay,
 } from 'date-fns';
+import { Op } from 'sequelize';
+import * as Yup from 'yup';
 
-import Order from '../models/Order';
 import Deliverymen from '../models/Deliverymen';
 import File from '../models/File';
+import Order from '../models/Order';
 
 class DeliverymenController {
   async index(req, res) {

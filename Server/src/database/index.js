@@ -1,13 +1,12 @@
-import Sequelize from 'sequelize';
 import mongoose from 'mongoose';
+import Sequelize from 'sequelize';
 
-import User from '../app/models/User';
-import Recipient from '../app/models/Recipient';
-import File from '../app/models/File';
 import Deliverymen from '../app/models/Deliverymen';
-import Order from '../app/models/Order';
 import Deliveryproblem from '../app/models/Deliveryproblem';
-
+import File from '../app/models/File';
+import Order from '../app/models/Order';
+import Recipient from '../app/models/Recipient';
+import User from '../app/models/User';
 import databaseConfig from '../config/database';
 
 const models = [User, Recipient, File, Deliverymen, Order, Deliveryproblem];
